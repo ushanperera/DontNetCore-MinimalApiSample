@@ -2,15 +2,23 @@ var app = WebApplication.CreateBuilder(args).Build();
 app.UseHttpsRedirection();
 
 
-//Dummy data will be respond from the endpoints
+//----Dummy data will be respond from the endpoints--------
 
 // Endpoint 1
-app.MapGet("/emplyee/{id:int}", (int id, IConfiguration config) =>
+app.MapGet("/employee/{id:int}", (int id) =>
 {
-    return new PersonRecord(id, "Kamal", "Perera");
+    return new EmployeeRecord(id, "Kamal", "Perera");
 });
 
 // Endpoint 2
+app.MapPost("/employee", (EmployeeRecord employee) =>
+{
+    return employee;
+});
+
+
+//---With Dependency Injection logics in place (IConfiguration) -------------
+// Endpoint 3
 app.MapGet("/person/{id:int}", (int id, IConfiguration config) =>
 {
     return new PersonRecord(
@@ -19,7 +27,7 @@ app.MapGet("/person/{id:int}", (int id, IConfiguration config) =>
         config.GetValue<string>("TestInfo:LastName")!);
 });
 
-// Endpoint 3
+// Endpoint 4
 app.MapPost("/person", (PersonRecord person, IConfiguration config) =>
 {
     int id = config.GetValue<int>("TestInfo:Id");
@@ -29,4 +37,5 @@ app.MapPost("/person", (PersonRecord person, IConfiguration config) =>
 
 app.Run();
 
+record EmployeeRecord(int Id, string FirstName, string LastName);
 record PersonRecord(int Id, string FirstName, string LastName);
