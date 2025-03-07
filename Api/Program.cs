@@ -1,3 +1,5 @@
+
+//Create application
 var app = WebApplication.CreateBuilder(args).Build();
 app.UseHttpsRedirection();
 
@@ -35,7 +37,10 @@ app.MapPost("/person", (PersonRecord person, IConfiguration config) =>
     return newPerson;
 });
 
+//Start
 app.Run();
 
+
+//Classes
 record EmployeeRecord(int Id, string FirstName, string LastName);
 record PersonRecord(int Id, string FirstName, string LastName);
