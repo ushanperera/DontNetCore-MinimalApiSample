@@ -1,0 +1,23 @@
+﻿@Api_HostAddress = https://localhost:7243
+
+
+#Call endpoint 1 (get)
+Get {{Api_HostAddress}}/emplyee/2
+
+###
+
+#Call endpoint 2 (get)
+Get {{Api_HostAddress}}/person/5
+
+###
+
+#Call endpoint 3 (post)
+Post {{Api_HostAddress}}/person
+Content-Type: application/json
+{
+  "id": 0,
+  "firstName": "Ushan",
+  "lastName": "Perera"
+}
+
+###
